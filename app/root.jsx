@@ -11,6 +11,7 @@ import favicon from '../public/favicon.svg';
 import {useNonce} from '@shopify/hydrogen';
 import {Layout} from './components/Layout';
 import {Seo} from '@shopify/hydrogen';
+import {defer} from '@shopify/remix-oxygen';
 
 // This is important to avoid re-fetching root queries on sub-navigations
 export const shouldRevalidate = ({formMethod, currentUrl, nextUrl}) => {
@@ -51,8 +52,12 @@ export const handle = {
 };
 
 export async function loader({context}) {
-  const layout = await context.storefront.query(LAYOUT_QUERY);
-  return {layout};
+  const {cart} = context;
+  const {shop} = await context.storefront.query(LAYOUT_QUERY);
+  return defer({
+    shop,
+    cart: cart.get(),
+  });
 }
 
 export default function App() {
