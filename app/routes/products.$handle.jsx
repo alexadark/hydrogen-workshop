@@ -1,6 +1,7 @@
 import {useLoaderData} from '@remix-run/react';
 import {json} from 'react-router';
 import {Image, Money, ShopPayButton} from '@shopify/hydrogen';
+import {AddToCartButton} from '~/components/cart';
 
 const seo = ({data}) => ({
   title: data?.product?.title,
@@ -79,6 +80,10 @@ export default function ProductHandle() {
                 storeDomain={storeDomain}
                 width={'400px'}
                 className="mb-3"
+              />
+              <AddToCartButton
+                variantId={selectedVariant?.id}
+                style="w-full mt-2"
               />
             </div>
           )}
