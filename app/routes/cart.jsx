@@ -1,7 +1,9 @@
+import {Await, useMatches} from '@remix-run/react';
 import {json} from '@shopify/remix-oxygen';
 import {CartForm} from '@shopify/hydrogen';
 import invariant from 'invariant';
-import {CartEmpty} from '~/components/cart';
+import {CartContent, CartEmpty} from '~/components/cart';
+import {Suspense} from 'react';
 
 export async function action({request, context}) {
   const {cart} = context;
@@ -32,7 +34,24 @@ export async function action({request, context}) {
 }
 
 const Cart = () => {
-  return <CartEmpty />;
+  const [root] = useMatches();
+  const cart = root.data?.cart;
+
+  return (
+    <Suspense>
+      <Await resolve={cart}>
+        {(data) => (
+          <div>
+            {data?.totalQuantity > 0 ? (
+              <CartContent cart={data} />
+            ) : (
+              <CartEmpty />
+            )}
+          </div>
+        )}
+      </Await>
+    </Suspense>
+  );
 };
 
 export default Cart;
