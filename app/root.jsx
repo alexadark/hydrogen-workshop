@@ -5,12 +5,12 @@ import {
   Scripts,
   LiveReload,
   ScrollRestoration,
-  useLoaderData,
 } from '@remix-run/react';
 import appStyles from './styles/app.css';
 import favicon from '../public/favicon.svg';
 import {useNonce} from '@shopify/hydrogen';
 import {Layout} from './components/Layout';
+import {Seo} from '@shopify/hydrogen';
 
 // This is important to avoid re-fetching root queries on sub-navigations
 export const shouldRevalidate = ({formMethod, currentUrl, nextUrl}) => {
@@ -42,6 +42,14 @@ export const links = () => {
   ];
 };
 
+const seo = ({data}) => ({
+  title: data?.shop?.name,
+  description: data?.shop?.description,
+});
+export const handle = {
+  seo,
+};
+
 export async function loader({context}) {
   const layout = await context.storefront.query(LAYOUT_QUERY);
   return {layout};
@@ -49,13 +57,11 @@ export async function loader({context}) {
 
 export default function App() {
   const nonce = useNonce();
-  const data = useLoaderData();
-
-  const {name} = data.layout.shop;
 
   return (
     <html lang="en">
       <head>
+        <Seo />
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
