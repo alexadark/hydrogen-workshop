@@ -1,5 +1,6 @@
 import {Link} from '@remix-run/react';
 import Menu from './Menu';
+import CartIcon from './cart/CartIcon';
 
 const Header = () => {
   return (
@@ -13,6 +14,7 @@ const Header = () => {
           </h1>
           <Menu />
         </div>
+        <CartIcon />
       </div>
     </header>
   );
