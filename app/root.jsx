@@ -14,9 +14,13 @@ import {Seo} from '@shopify/hydrogen';
 import {defer} from '@shopify/remix-oxygen';
 import {storyblokInit, apiPlugin} from '@storyblok/react';
 import Page from './components/bloks/Page';
+import Banner from './components/bloks/Banner';
+import PersonalizedBanners from './components/bloks/PersonalizedBanners';
 
 const components = {
   page: Page,
+  banner: Banner,
+  'personalized-banners': PersonalizedBanners,
 };
 
 storyblokInit({
