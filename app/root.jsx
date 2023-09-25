@@ -12,6 +12,15 @@ import {useNonce} from '@shopify/hydrogen';
 import {Layout} from './components/Layout';
 import {Seo} from '@shopify/hydrogen';
 import {defer} from '@shopify/remix-oxygen';
+import {storyblokInit, apiPlugin} from '@storyblok/react';
+
+const components = {};
+
+storyblokInit({
+  accessToken: 'aVPSgag6Rrp47qg0HOHIbgtt',
+  use: [apiPlugin],
+  components,
+});
 
 // This is important to avoid re-fetching root queries on sub-navigations
 export const shouldRevalidate = ({formMethod, currentUrl, nextUrl}) => {
