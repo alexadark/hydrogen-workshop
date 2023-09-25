@@ -16,11 +16,13 @@ import {storyblokInit, apiPlugin} from '@storyblok/react';
 import Page from './components/bloks/Page';
 import Banner from './components/bloks/Banner';
 import PersonalizedBanners from './components/bloks/PersonalizedBanners';
+import SingleProduct from './components/bloks/shopify/SingleProduct';
 
 const components = {
   page: Page,
   banner: Banner,
   'personalized-banners': PersonalizedBanners,
+  'single-product': SingleProduct,
 };
 
 storyblokInit({
