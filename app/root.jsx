@@ -13,8 +13,11 @@ import {Layout} from './components/Layout';
 import {Seo} from '@shopify/hydrogen';
 import {defer} from '@shopify/remix-oxygen';
 import {storyblokInit, apiPlugin} from '@storyblok/react';
+import Page from './components/bloks/Page';
 
-const components = {};
+const components = {
+  page: Page,
+};
 
 storyblokInit({
   accessToken: 'aVPSgag6Rrp47qg0HOHIbgtt',
