@@ -3,6 +3,7 @@ import {Image} from '@shopify/hydrogen';
 import {json} from '@shopify/remix-oxygen';
 import ProductGrid from '~/components/ProductGrid';
 import {getPaginationVariables} from '@shopify/hydrogen';
+import {getCookie, setCookie} from 'react-use-cookie';
 
 const seo = ({data}) => ({
   title: data?.collection?.title,
@@ -37,6 +38,11 @@ export async function loader({params, context, request}) {
 
 export default function Collection() {
   const {collection} = useLoaderData();
+
+  // personalization: we set the user type to the collection title that the user is currently viewing
+  if (!getCookie('user_type)') && collection) {
+    setCookie('user_type', collection.handle);
+  }
 
   return (
     <>
