@@ -61,8 +61,8 @@ export const handle = {
 };
 
 export async function loader({context}) {
-  const {cart} = context;
   const {shop} = await context.storefront.query(LAYOUT_QUERY);
+  const {cart} = context;
   return defer({
     shop,
     cart: cart.get(),
